@@ -1,0 +1,32 @@
+body {
+    margin: 20px;
+    font-family: Montserrat, sans-serif;
+}
+
+.history {
+    margin: 50px;
+    width: 500px;
+    border: #040404 solid 1px;
+    justify-content: space-between;
+}
+
+.ttn_history li {
+    list-style: none;
+}
+
+.btn_tracking {
+    text-decoration: none;
+    border: #040404 2px solid;
+    padding: 10px;
+    border-radius: 8px;
+    color: cadetblue;
+
+}
+
+#tracking {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 300px;
+    background-color: lemonchiffon;
+}
