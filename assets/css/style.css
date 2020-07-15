@@ -30,3 +30,8 @@ body {
     width: 300px;
     background-color: lemonchiffon;
 }
+
+.posts {
+    border: #040404 2px solid;
+    text-align: right ;
+}

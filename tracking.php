@@ -26,14 +26,37 @@
         <form action="vendor/model.php" method="post" id="tracking">
             <input type="text" name="ttn" id="ttn_input">
             <i class="auth__error_hide">Неверный формат ТТН</i>
-            <button type="submit" onclick="getResponse()"class="btn_tracking">Получить инфу ТТН</button>
+            <button type="submit" class="btn_tracking">Получить инфу ТТН</button>
 
         </form>
     </div>
 
     <div class="posts">
         <ul>
-
+            <?php
+                $curl = curl_init();
+                curl_setopt_array($curl, array(
+                  CURLOPT_URL => "https://api.novaposhta.ua/v2.0/json/",
+                  CURLOPT_RETURNTRANSFER => true,
+                  CURLOPT_ENCODING => "",
+                  CURLOPT_MAXREDIRS => 10,
+                  CURLOPT_TIMEOUT => 0,
+                  CURLOPT_FOLLOWLOCATION => true,
+                  CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                  CURLOPT_CUSTOMREQUEST => "POST",
+                  CURLOPT_POSTFIELDS =>"\r\n\r\n{\r\n    \"apiKey\": \"43d8a08687be071848b65df4d2b25607\",\r\n    \"modelName\": \"TrackingDocument\",\r\n    \"calledMethod\": \"getStatusDocuments\",\r\n    \"methodProperties\": {\r\n        \"Documents\": [\r\n            {\r\n                \"DocumentNumber\": \"20450222820982\",\r\n                \"Phone\":\"0980918794\"\r\n            }\r\n        ]\r\n    }\r\n    \r\n}",
+                  CURLOPT_HTTPHEADER => array(
+                    "Content-Type: application/json",
+                    "Cookie: PHPSESSID=ee8986256b573cf2c0450d2aaed138d2; YIICSRFTOKEN=1e124333177720c7c71caa4a6de8784a17aab424s%3A88%3A%22YnNFWXkzflNpaDBHS0lIN0JyV3pqcVRIWnhQeklIS3RsPICtF2vemWelL6JTyTcp5gqjU1w5Qt-P6QcmkxCd-g%3D%3D%22%3B"
+                  ),
+                ));                
+                $response = curl_exec($curl);               
+                curl_close($curl);
+                
+                echo $response;
+                // echo $arr['SenderAddress'];
+                // echo $arr['RecipientAddress']
+            ?>
         </ul>
     </div>
     <div class="history">
@@ -45,7 +68,7 @@
                 
                 if ($result = mysqli_query($connect, $query)) {
                     while ($row = mysqli_fetch_assoc($result)) {
-                        echo "<li>" . $row['ttn'] . "</li>";
+                        echo "<li>" . "<a href=\"#\">" . $row['ttn'] . "</a>" . "</li>";
                     }
                 }
             ?>
@@ -56,4 +79,4 @@
 </body>
 
 </html>
-<script src="assets/js/main.js"></script>
+<!-- script src="assets/js/main.js"></script> -->
